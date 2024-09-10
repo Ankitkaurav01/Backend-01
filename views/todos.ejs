@@ -8,16 +8,17 @@
 <body>
     <h1>Todo-List</h1>
 
-     <h2>Create Todo</h2>
+     <h2 id="heading">Create Todo</h2>
      <form action="/createTodo" method="post">
-        <input type="text" placeholder="todo name" name="name">
-        <input type="email" placeholder="todo email" name="email">
-        <input type="text" placeholder="todo description" name="description">
-        <select name="status" id="">
+        <input type="hidden" name="userId" id="id">
+        <input type="text" placeholder="todo name" name="name" id="name">
+        <input type="email" placeholder="todo email" name="email" id="email">
+        <input type="text" placeholder="todo description" name="description" id="description">
+        <select name="status" id="status">
               <option name="status">Pending</option>
               <option name="status">Done</option>
         </select>
-        <button type="submit">Create</button>
+        <button type="submit" id="create-btn">Create</button>
      </form>
 
       <ul>
@@ -30,9 +31,34 @@
                 <form action="/deleteTodo/<%= todo._id %>" method="get">
                     <button type="submit">Delete</button>
                 </form>
+                <!-- <form action="/updateTodo/<%= todo._id %>" method="post">
+                    <input type="text" placeholder="todo name" name="name" value="<%= todo.name %>">
+                    <input type="email" placeholder="todo email" name="email" value="<%= todo.email %>">
+                    <input type="text" placeholder="todo description" name="description" value="<%= todo.description %>">
+                    <select name="status" id="">
+                             <option name="status" value="<%= todo.status %>">Pending</option>
+                             <option name="status" value="<%= todo.status %>">Done</option>
+                    </select>
+                             <button type="submit">Update</button>
+                </form> -->
+                   <button onclick="editTodo('<%= todo._id %>', '<%= todo.name %>', '<%= todo.email %>', '<%= todo.description %>', '<%= todo.status %>')">Edit</button>
               </li>
          <%  })%>
       </ul>
 
 </body>
+
+<script>
+    function editTodo(id, name, email, description, status){
+        document.getElementById('id').value = id;
+        document.getElementById('name').value = name;
+        document.getElementById('email').value = email;
+        document.getElementById('description').value = description;
+        document.getElementById('status').value = status;
+
+        document.getElementById('create-btn').innerHTML = 'Update';
+        document.getElementById('heading').innerHTML = 'Update-TODO';
+    }
+</script>
+
 </htmls
